@@ -10,10 +10,10 @@ def capture():
     ret, frame, = cam.read()
     global i
     while True:
-        if os.path.exists('image'+ str(i) + '.jpg'):
+        if os.path.exists(f'image{i}.jpg'):
             i += 1
         else:
-            check = cv2.imwrite('image'+ str(i) + '.jpg', frame)
+            check = cv2.imwrite(f'image{i}.jpg', frame)
             if check:
                 print('Capture Successful')
             break
@@ -27,7 +27,7 @@ plastic = [4, 5, 6, 7, 8, 9, 10, 11]
 glass = [12]
 
 model = yolo('trashscan.pt')
-source = str(path) + '/image' + str(i) + '.jpg'
+source = f'{path}/image{i}.jpg'
 
 results = model(source, max_det = 1, conf = 0.5)
 detection = results[0].boxes
